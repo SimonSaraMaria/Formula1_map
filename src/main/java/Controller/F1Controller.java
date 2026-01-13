@@ -1,6 +1,7 @@
 package Controller;
 import Model.*;
 import Repository.F1Repository;
+import Service.EreignisService;
 import Service.FahrerService;
 
 import java.io.IOException;
@@ -25,9 +26,9 @@ public class F1Controller {
                 System.out.println("2. Task 2: Filter by Team and Status");
                 System.out.println("3. Task 3: Sort Fahrer by skill level");
                 System.out.println("4. Task 4: Saving sorted Fahrer to file");
-//                System.out.println("5. Task 5: Computed points for first 5 events");
-//                System.out.println("6. Task 6: Top 5 tributes");
-//                System.out.println("7. Task 7: Arena report");
+                System.out.println("5. Task 5: Computed points ");
+                System.out.println("6. Task 6: Top 5 Fahrer");
+                System.out.println("7. Task 7: Race report");
                 System.out.println("0. Exit");
                 System.out.print("Choice: ");
 
@@ -68,36 +69,31 @@ public class F1Controller {
                             System.err.println(e);
                         }
                     }
-//                    case 5 -> {
-//                        System.out.print("Computed points: ");
-//                        EventService eventService = new EventService();
-//                        for (int i = 0; i < 5 && i < events.size(); i++) {
-//                            Ereignis e = events.get(i);
-//                            int computedPoints = eventService.calculateComputedPoints(e);
-//                            System.out.println("Event" + e.getId() + "-> rawPoints" + e.getPoints() +
-//                                    "-> computedPoints = " + computedPoints);
-//                        }
-//                    }
-//                    case 6 -> {
-//                        System.out.println("Top 5 Tributes:");
-//                        EventService eventService = new EventService();
-//                        var top5 = eventService.calculateTopTributes(tributes, events, gifts);
-//                        int rank = 1;
-//                        for (var entry : top5) {
-//                            System.out.println(rank + ". " + entry.getKey().getName() + " -> " + entry.getValue());
-//                            rank++;
-//                        }
-//                    }
-//                    case 7 -> {
-//                        System.out.println("Arena report:");
-//                        try {
-//                            EventService eventService = new EventService();
-//                            eventService.generateArenaReport(events, "arena_report.txt");
-//                            System.out.println("Successfully saved arena report!");
-//                        } catch (Exception e) {
-//                            System.err.println(e);
-//                        }
-//                    }
+                    case 5 -> {
+                        System.out.print("Computed points: ");
+                        EreignisService ereignisService = new EreignisService();
+                        for (int i = 0; i < 5 && i < ereignis.size(); i++) {
+                            RennenEreignis e = ereignis.get(i);
+                            int computedPoints = ereignisService.calculateComputedPoints(e);
+                            System.out.println("Event" + e.getId() + "-> rawPoints" + e.getBasePoints() +
+                                    "-> computedPoints = " + computedPoints);
+                        }
+                    }
+                    case 6 -> {
+                        System.out.println("Top 5 Fahrer:");
+                        EreignisService ereignisService = new EreignisService();
+                        ereignisService.printTop5AndWinningTeam(fahrer, ereignis, strafe);
+                    }
+                    case 7 -> {
+                        System.out.println("Race report:");
+                        try {
+                            EreignisService ereignisService = new EreignisService();
+                            ereignisService.generateReport(ereignis, "race_report.txt");
+                            System.out.println("Successfully saved race report!");
+                        } catch (Exception e) {
+                            System.err.println(e);
+                        }
+                    }
                     case 0 -> {
                         running = false;
                         System.out.println("Exiting...");
