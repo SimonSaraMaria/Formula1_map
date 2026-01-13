@@ -1,6 +1,7 @@
 package Controller;
 import Model.*;
 import Repository.F1Repository;
+import Service.FahrerService;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,6 +11,7 @@ public class F1Controller {
     public void run() {
         try {
             F1Repository repo = new F1Repository();
+            FahrerService fahrerService = new FahrerService();
             Scanner scanner = new Scanner(System.in);
 
             List<Fahrer> fahrer = repo.readFahrer("drivers.json");
@@ -20,9 +22,9 @@ public class F1Controller {
             while (running) {
                 System.out.println("\n--- Hunger Games Menu ---");
                 System.out.println("1. Task 1: Show Data");
-//                System.out.println("2. Task 2: Filter by District and Status");
-//                System.out.println("3. Task 3: Sort tributes by skill level");
-//                System.out.println("4. Task 4: Saving sorted tributes to file");
+                System.out.println("2. Task 2: Filter by Team and Status");
+                System.out.println("3. Task 3: Sort Fahrer by skill level");
+                System.out.println("4. Task 4: Saving sorted Fahrer to file");
 //                System.out.println("5. Task 5: Computed points for first 5 events");
 //                System.out.println("6. Task 6: Top 5 tributes");
 //                System.out.println("7. Task 7: Arena report");
@@ -40,31 +42,32 @@ public class F1Controller {
                             System.out.println(f);
                         }
                     }
-//                    case 2 -> {
-//                        System.out.print("Input district: ");
-//                        int districtInput = scanner.nextInt();
-//                        List<Tribut> filtered = tributeService.filterAliveByDistrict(tributes, districtInput);
-//                        for (Tribut t : filtered) {
-//                            System.out.println(t);
-//                        }
-//                    }
-//                    case 3 -> {
-//                        System.out.print("Sorted tributes: ");
-//                        List<Tribut> sorted = tributeService.getSortedTributes(tributes);
-//                        for (Tribut t : sorted) {
-//                            System.out.println(t);
-//                        }
-//                    }
-//                    case 4 -> {
-//                        System.out.print("Saving sorted tributes: ");
-//                        try {
-//                            List<Tribut> sorted = tributeService.getSortedTributes(tributes);
-//                            tributeService.saveTributesToFile(sorted, "tributes_sorted.txt");
-//                            System.out.println("Successfully saved sorted tributes!");
-//                        } catch (IOException e) {
-//                            System.err.println(e);
-//                        }
-//                    }
+                    case 2 -> {
+                        scanner.nextLine();
+                        System.out.print("Input team name: ");
+                        String teamInput = scanner.nextLine();
+                        List<Fahrer> filtered = fahrerService.filterTeamByStatus(fahrer, teamInput);
+                        for (Fahrer f: filtered) {
+                            System.out.println(f);
+                        }
+                    }
+                    case 3 -> {
+                        System.out.print("Sorted Fahrer: ");
+                        List<Fahrer> sorted = fahrerService.getSortedFahrer(fahrer);
+                        for (Fahrer f : sorted) {
+                            System.out.println(f);
+                        }
+                    }
+                    case 4 -> {
+                        System.out.print("Saving sorted Fahrer: ");
+                        try {
+                            List<Fahrer> sorted = fahrerService.getSortedFahrer(fahrer);
+                            fahrerService.saveFahrerToFile(sorted, "drivers_sorted.txt");
+                            System.out.println("Successfully saved sorted Fahrer!");
+                        } catch (IOException e) {
+                            System.err.println(e);
+                        }
+                    }
 //                    case 5 -> {
 //                        System.out.print("Computed points: ");
 //                        EventService eventService = new EventService();
