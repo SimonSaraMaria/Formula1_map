@@ -4,12 +4,12 @@ public class Fahrer {
     private int id;
     private String name;
     private String team;
-    private String status;
+    private FahrerStatus status;
     private int skillLevel;
 
     public Fahrer() {}
 
-    public Fahrer(int id, String name, String team, String status, int skillLevel) {
+    public Fahrer(int id, String name, String team, FahrerStatus status, int skillLevel) {
         this.id = id;
         this.name = name;
         this.team = team;
@@ -41,11 +41,11 @@ public class Fahrer {
         this.team = team;
     }
 
-    public String getStatus() {
+    public FahrerStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(FahrerStatus status) {
         this.status = status;
     }
 

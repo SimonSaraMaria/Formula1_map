@@ -3,13 +3,13 @@ package Model;
 public class Strafe {
     private int id;
     private int fahrerId;
-    private String grund;
+    private StrafeGrund grund;
     private int seconds;
     private int lap;
 
     public Strafe() {}
 
-    public Strafe(int id, int fahrerId, String grund, int seconds, int lap) {
+    public Strafe(int id, int fahrerId, StrafeGrund grund, int seconds, int lap) {
         this.id = id;
         this.fahrerId = fahrerId;
         this.grund = grund;
@@ -33,11 +33,11 @@ public class Strafe {
         this.fahrerId = fahrerId;
     }
 
-    public String getgrund() {
+    public StrafeGrund getGrund() {
         return grund;
     }
 
-    public void setgrund(String grund) {
+    public void setGrund(StrafeGrund grund) {
         this.grund = grund;
     }
 

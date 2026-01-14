@@ -3,13 +3,13 @@ package Model;
 public class RennenEreignis {
     private int id;
     private int fahrerId;
-    private String typ;
+    private EreignisTyp typ;
     private int basePoints;
     private int lap;
 
     public RennenEreignis() {}
 
-    public RennenEreignis(int id, int fahrerId, String typ, int basePoints, int lap) {
+    public RennenEreignis(int id, int fahrerId, EreignisTyp typ, int basePoints, int lap) {
         this.id = id;
         this.fahrerId = fahrerId;
         this.typ = typ;
@@ -33,11 +33,11 @@ public class RennenEreignis {
         this.fahrerId = fahrerId;
     }
 
-    public String gettyp() {
+    public EreignisTyp getTyp() {
         return typ;
     }
 
-    public void settyp(String typ) {
+    public void setTyp(EreignisTyp typ) {
         this.typ = typ;
     }
 
